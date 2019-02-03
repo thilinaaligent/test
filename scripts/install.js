@@ -11,6 +11,8 @@ const getExistingThemes = require('./get-existing-themes');
 const logger = require('./logger');
 const { baseDir, scssSource } = require('./constants');
 
+const replace = require('replace-in-file');
+
 checkEnvironment(); // Ensure the script is being called from the right place
 
 const themesOptions = getExistingThemes();
@@ -73,6 +75,11 @@ function getSCSSSourceDirectory (themeDirectory) {
     return `${themeDirectory}/${scssSource}`;
 }
 
+function createThemeStructure (themeDirectory) {
+    logger('Adding required theme files', 'log');
+    cp.execSync('pwd'); // Remove the downloaded zip
+}
+
 function downloadInstallRepository(themeDirectory) {
     logger('Downloading Aligent SCSS Outline repository', 'log');
     // Download a zip of the archive
@@ -100,11 +107,12 @@ function installDependency() {
 try {
     (async () => {
         const themeDirectory = await getThemeDirectory();
+        createThemeStructure(themeDirectory);
         const scssSource = getSCSSSourceDirectory(themeDirectory);
         logger('Checking for SCSS source directory', 'log');
         fs.ensureDirSync(scssSource); // Checks that there is a SCSS source directory, and creates it if not
-        downloadInstallRepository(themeDirectory);
-        installDependency();
+        //downloadInstallRepository(themeDirectory);
+        //installDependency();
         logger('Dependencies installed', 'success');
         logger(`Now is a good time to create a pull request ${emoji.get('fire')}`, 'log');
     })();
