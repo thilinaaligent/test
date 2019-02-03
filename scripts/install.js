@@ -76,8 +76,18 @@ function getSCSSSourceDirectory (themeDirectory) {
 }
 
 function createThemeStructure (themeDirectory) {
-    logger('Adding required theme files', 'log');
-    cp.execSync('pwd'); // Remove the downloaded zip
+    logger('Downloading Aligent Seed Theme repository', 'log');
+    // Download a zip of the archive
+    cp.execSync('git archive --remote=ssh://git@github.com:thilinaaligent.git --format=zip --output="themeseed.zip" master');
+    logger('Aligent Seed Theme successfully downloaded', 'success');
+    cp.execSync(`unzip themeseed.zip -d '${themeDirectory}'`); // Extract to the SCSS source directory
+    cp.execSync('rm themeseed.zip'); // Remove the downloaded zip
+    // Remove all files/folder that aren't the `src` directory
+    cp.execSync(`find ${themeDirectory} -mindepth 1 ! -regex \'^${themeDirectory}/${scssSource}/src\\(/.*\\)?\' -delete`);
+    cp.execSync(`mv ${themeDirectory}/src/* ${themeDirectory}`); // Move everything in the `src` directory up one level, to be in the root of the SCSS source directory
+    cp.execSync(`rm -rf ${themeDirectory}/src`); // Remove the now empty `src` directory
+
+    logger(`Added required theme files to ${themeDirectory}`, 'log');
 }
 
 function downloadInstallRepository(themeDirectory) {
