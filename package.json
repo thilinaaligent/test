@@ -1,0 +1,22 @@
+{
+    "name": "aligentthemeseed",
+    "version": "1.0.0",
+    "description": "A set of files/directories used to seed a new Magento 2 theme at Aligent",
+    "bin": "./scripts/install.js",
+    "scripts": {
+      "themeseed": "node scripts/install.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+ssh://git@bitbucket.org/aligent/themeseed.git"
+    },
+    "author": "Aligent Consulting <contact@aligent.com.au> (https://aligent.com.au)",
+    "license": "ISC",
+    "homepage": "https://bitbucket.org/aligent/themeseed#readme",
+    "dependencies": {
+      "chalk": "^2.4.2",
+      "enquirer": "^2.3.0",
+      "fs-extra": "^7.0.1",
+      "node-emoji": "^1.8.1"
+    }
+  }
