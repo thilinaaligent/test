@@ -87,6 +87,18 @@ function createThemeStructure (themeDirectory) {
     cp.execSync(`mv ${themeDirectory}/src/* ${themeDirectory}`); // Move everything in the `src` directory up one level, to be in the root of the SCSS source directory
     cp.execSync(`rm -rf ${themeDirectory}/src`); // Remove the now empty `src` directory
 
+    try {
+        const changes = await replace({
+            files: `${themeDirectory}`,
+            from: '[Vendor]/[Theme]',
+            to: `${themeDirectory}`,
+        });
+        console.log('Modified files:', changes.join(', '));
+    }
+    catch (error) {
+        console.error('Error occurred:', error);
+    }
+
     logger(`Added required theme files to ${themeDirectory}`, 'log');
 }
 
