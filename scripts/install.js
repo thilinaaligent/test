@@ -75,7 +75,7 @@ function getSCSSSourceDirectory (themeDirectory) {
     return `${themeDirectory}/${scssSource}`;
 }
 
-function createThemeStructure (themeDirectory) {
+async function createThemeStructure (themeDirectory) {
     logger('Downloading Aligent Seed Theme repository', 'log');
     // Download a zip of the archive
     cp.execSync('git archive --remote=ssh://git@github.com:thilinaaligent/test.git --format=zip --output="themeseed.zip" master');
