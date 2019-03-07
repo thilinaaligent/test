@@ -83,21 +83,21 @@ async function createThemeStructure (themeDirectory) {
     cp.execSync(`unzip themeseed.zip -d '${themeDirectory}'`); // Extract to the SCSS source directory
     cp.execSync('rm themeseed.zip'); // Remove the downloaded zip
     // Remove all files/folder that aren't the `src` directory
-    cp.execSync(`find ${themeDirectory} -mindepth 1 ! -regex \'^${themeDirectory}/${scssSource}/src\\(/.*\\)?\' -delete`);
-    cp.execSync(`mv ${themeDirectory}/src/* ${themeDirectory}`); // Move everything in the `src` directory up one level, to be in the root of the SCSS source directory
-    cp.execSync(`rm -rf ${themeDirectory}/src`); // Remove the now empty `src` directory
+    // cp.execSync(`find ${themeDirectory} -mindepth 1 ! -regex \'^${themeDirectory}/${scssSource}/src\\(/.*\\)?\' -delete`);
+    // cp.execSync(`mv ${themeDirectory}/src/* ${themeDirectory}`); // Move everything in the `src` directory up one level, to be in the root of the SCSS source directory
+    // cp.execSync(`rm -rf ${themeDirectory}/src`); // Remove the now empty `src` directory
 
-    try {
-        const changes = await replace({
-            files: `${themeDirectory}`,
-            from: '[Vendor]/[Theme]',
-            to: `${themeDirectory}`,
-        });
-        console.log('Modified files:', changes.join(', '));
-    }
-    catch (error) {
-        console.error('Error occurred:', error);
-    }
+    // try {
+    //     const changes = await replace({
+    //         files: `${themeDirectory}`,
+    //         from: '[Vendor]/[Theme]',
+    //         to: `${themeDirectory}`,
+    //     });
+    //     console.log('Modified files:', changes.join(', '));
+    // }
+    // catch (error) {
+    //     console.error('Error occurred:', error);
+    // }
 
     logger(`Added required theme files to ${themeDirectory}`, 'log');
 }
