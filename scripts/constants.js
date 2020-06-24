@@ -10,3 +10,4 @@ module.exports = {
 };
 
 consol.log('1');
+consol.log('1');
