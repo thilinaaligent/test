@@ -8,3 +8,5 @@ module.exports = {
   baseDir: './app/design/frontend/',
   scssSource: 'source/scss' // Relative to the baseDir/[Vendor]/[Theme] directory
 };
+
+consol.log('1');
